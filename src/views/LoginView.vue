@@ -49,8 +49,9 @@ import axios from "axios"
                 password: this.password
             })
             .then((response) => {
-                    if (response.status === 200 && response.data.status === "ok") {
+                    if (response.status === 200 && response.data.status === "success") {
                         this.$toasted.success("Success!");
+                        localStorage.setItem("token", response.data.data._token);
                         this.$router.push('/dashboard')
                     } else {
                         this.$toasted.error("oops an error occurred");
@@ -62,8 +63,6 @@ import axios from "axios"
                     console.log(error);
                     this.$toasted.error("An error occured. Please, try again later.");
                 })
-            console.log(response)
-            localStorage.setItem("token", response.data.token);
         }
       }
     }
