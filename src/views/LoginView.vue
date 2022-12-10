@@ -44,7 +44,7 @@ import axios from "axios"
                 this.$toasted.error("Please enter your password");
                 return false;
             }
-            await axios.post("http://34.192.182.160:8010/login", {
+            await axios.post("http://34.192.182.160:8010/admin/login", {
                 email:this.email,
                 password: this.password
             })
@@ -61,7 +61,11 @@ import axios from "axios"
                 })
                 .catch((error) => {
                     console.log(error);
-                    this.$toasted.error("An error occured. Please, try again later.");
+                    if (error.response.data.message) {
+                        this.$toasted.error(error.response.data.message);
+                    } else {
+                        this.$toasted.error("An error occured. Please, try again later.");
+                    }
                 })
         }
       }
