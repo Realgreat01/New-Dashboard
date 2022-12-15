@@ -14,10 +14,8 @@
           </form>
         </div>
       </div>
-      <br />
-      <br />
-      <div class="metrics_container">
-        <div class="first_card">
+      <div class="grid-container">
+      <div class="first_card">
           <div class="inner">
             <div class="section_one">
               <img src="../assets/organization_icon.svg" alt="organization_icon">
@@ -33,47 +31,48 @@
             </div>
           </div>
         </div>
-        <div class="first_set">
-          <div class="public_div">
-            <img src="../assets/public_icon.svg" alt="">
+     <div class="grid-container-div">
+      <div class="public_div">
+            <img class="img_small" src="../assets/user_icon.svg" alt="">
             <div>
-              <h4>Public Networks</h4>
+              <h4>Public Network</h4>
               <br />
               <p>{{dashboard.public_network}}</p>
             </div>
           </div>
-          <div class="public_div">
-            <img src="../assets/private_network.svg" alt="">
+      <div class="public_div">
+            <img class="img_small" src="../assets/user_icon.svg" alt="">
             <div>
-              <h4>Private Networks</h4>
+              <h4>Private Network</h4>
               <br />
               <p>{{dashboard.private_network}}</p>
             </div>
           </div>
-        </div>
-        <div class="first_set">
-          <div class="public_div">
-            <img src="../assets/user_icon.svg" alt="">
+     </div>
+     <div class="grid-container-div">
+      <div class="public_div">
+            <img class="img_small" src="../assets/user_icon.svg" alt="">
             <div>
               <h4>Users</h4>
               <br />
-              <p>{{dashboard.public_network}}</p>
+              <p>{{dashboard.users}}</p>
             </div>
           </div>
-          <div class="public_div">
-            <img src="../assets/driver_icon.svg" alt="">
+      <div class="public_div">
+            <img class="img_small" src="../assets/user_icon.svg" alt="">
             <div>
               <h4>Drivers</h4>
               <br />
               <p>{{dashboard.drivers}}</p>
             </div>
           </div>
-        </div>
-
-      </div>
+     </div>
+    </div>
       <div class="chart_container">
       <apexchart type="bar" :options="options" :series="series"></apexchart>
     </div>
+    
+ 
   </div>
 </template>
 
@@ -116,6 +115,19 @@ export default {
 </script>
 
 <style  scoped>
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-template-rows: auto;
+  gap: 30px;
+}
+.img_small {
+  width: 50px;
+}
+.grid-container-div {
+  display: grid;
+  gap: 30px;
+}
   h5 {
     color: #404040;
   }
@@ -221,6 +233,8 @@ input.nosubmit {
   border-radius: 12px;
   margin-bottom: 40px;
 }
+
+
 </style>
 
 

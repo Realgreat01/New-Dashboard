@@ -8,6 +8,7 @@
   </template>
   
   <script>
+  import { mapGetters } from 'vuex';
   // @ is an alias to /src
   import HelloWorld from '@/components/HelloWorld.vue'
   import NavComponent from '@/components/NavComponent.vue';
@@ -24,11 +25,18 @@ import axios from 'axios';
       FooterComponent
     },
     async created(){
+      this.$store.dispatch("user", response.data)
       const response = await axios.get("user", {
         headers: { 
           Authorization: "Bearer" + localStorage.getItem ("user")
         }
+        
       });
+    },
+    computed :{
+      computed: {
+    ...mapGetters(["user"])
+  }
     }
   }
   </script>

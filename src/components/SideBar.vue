@@ -23,19 +23,22 @@
     </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 export default {
     name: "SideBar",
     data() {
         return {
         }
     },
-    computed : {
-      isLoggedIn : function(){ return this.$store.getters.isAuthenticated}
-    },
     methods: {
       async logout (){
-        await this.$store.dispatch('LogOut')
+        localStorage.removeItem("token");
+        this.$store.dispatch("user", null)
         this.$router.push('/login')
+        // await this.$store.dispatch('LogOut')
+      },
+      computed: {
+        ...mapGetters(["user"])
       }
     },
 }
