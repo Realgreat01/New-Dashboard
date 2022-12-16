@@ -29,7 +29,7 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    meta:{auth:false},
+    // meta:{auth:false},
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -47,43 +47,43 @@ const routes = [
     path: '*',
     name: 'Not Found',
     component: NotFound,
-    meta:{auth:true},
+    // meta:{auth:true},
   },
   {
     path: '/riders',
     name: 'Riders',
     component: Riders,
-    meta:{auth:true},
+    // meta:{auth:true},
   },
   {
     path: '/organizations',
     name: 'Organizations',
     component: Organizations,
-    meta:{auth:true},
+    // meta:{auth:true},
   },
   {
     path: '/users',
     name: 'Users',
     component: Users,
-    meta:{auth:true},
+    // meta:{auth:true},
   },
   {
     path: '/drivers',
     name: 'Drivers',
     component: Drivers,
-    meta:{auth:true},
+    // meta:{auth:true},
   },
   {
     path: '/networks',
     name: 'Networks',
     component: Networks,
-    meta:{auth:true},
+    // meta:{auth:true},
   },
   {
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard,
-    meta:{auth:true},
+    // meta:{auth:true},
 
   },
   {
@@ -93,9 +93,9 @@ const routes = [
   }
 ]
 
-router.beforeEach(()=>{
+// router.beforeEach(()=>{
 
-})
+// })
 
 const router = new VueRouter({
   mode: 'history',

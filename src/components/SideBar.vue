@@ -5,7 +5,7 @@
                 <router-link to="/dashboard"> Dashboard</router-link>
             </div>
             <div class="links_links">
-                <router-link to="/riders"> Riders</router-link>
+                <router-link to="/riders"> Users</router-link>
             </div>
             <div class="links_links">
                 <router-link to="/networks"> Networks</router-link>
@@ -43,7 +43,7 @@ export default {
     },
 }
 </script>
-<style >
+<style scoped>
 .bar_container {
     background: #ffffff;
     width: 20%;

@@ -1,44 +1,71 @@
 <template>
-    <div>
-        <div>
-            <div class="bar_container">
-            <div class="sidebar_links">
-                <div class="links_links">
-                    <router-link to="/dashboard"> Dashboard</router-link>
-                </div>
-                <div class="links_links active">
-                    <router-link to="/riders"> Riders</router-link>
-                </div>
-                <div class="links_links">
-                    <router-link to="/networks"> Networks</router-link>
-                </div>
-                <div class="links_links">
-                    <router-link to="/organizations"> Organizations</router-link>
-                </div>
-                <div class="links_links">
-                    <router-link to="/drivers"> Drivers</router-link>
-                </div>
-            </div>
-            <button @click="logout" class="logout_btn">
-                Logout
-            </button>
-        </div>
-    </div>
-    </div>
+   <div class="wrapper">
+  <header><NavComponent /></header>
+  <article>
+    <UserComponent />
+  </article> 
+  <aside><SideNav /></aside>
+  <footer>
+    <FooterComponent />
+  </footer>
+</div>
 </template>
 
 <script>
-import SideBar from '@/components/SideBar.vue';
+import SideNav from '@/components/SideNav.vue';
+import NavComponent from '@/components/NavComponent.vue';
+import FooterComponent from '@/components/FooterComponent.vue';
+import UserComponent from '@/components/UserComponent.vue';
 
     export default {
     name: "RiderView",
     data() {
         return {};
     },
-    components: { SideBar }
+    components: { SideNav, NavComponent, FooterComponent, UserComponent }
 }
 </script>
 
 <style scoped>
+header {
+  grid-area: header;
+  width: 100%;
+}
+article {
+  grid-area: content;
+  width: 100%;
+}
+aside {
+  grid-area: sidebar;
+  width: 100%;
+  background: #ffffff;
+    border-left: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    height: 90vh!important;
 
+}
+footer {
+  grid-area: footer;
+  width: 100%;
+}
+.wrapper {
+  display: grid;
+  grid-gap: 0px;
+  grid-template-columns: 1fr 3fr;
+  gap: 20px;
+  background-color: #f9f9f9;
+  grid-template-areas: 
+    "header  header"
+    "sidebar content"
+    "footer  footer";
+}
+@media (max-width: 500px) {
+  .wrapper {
+    grid-template-columns: 4fr;
+    grid-template-areas:
+      "header"
+      "content"
+      "sidebar"
+      "footer";
+  }
+}
 </style>
