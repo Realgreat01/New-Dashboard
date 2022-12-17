@@ -2,75 +2,94 @@
     <div class="container">
         <h3 class="h3">Users</h3>
         <div class="filter_container">
-            <input type="search" name="search" id="" v-model="searchValue" placeholder="Search">
-            <!-- <div id="sort-bar">
-                <label for="sortBy">
-                    Sort
-                </label>
-                    <select name="sortBy" id="select" v-model="sortBy">
-                    <option  value="">select</option>
-                    <option value="alphabetically">Alphabetically</option>
-                    <option value="cookingTime">Cooking Time</option>
-                    </select>
-            </div> -->
+            <input type="search" name="search" id="" placeholder="Search" v-model="search">
             <button class="add_button">Add User</button>
         </div>
+            <table>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
+                    </td>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Location</th>
+                    <th>Phone</th>
+                </tr>
+                <tr v-for="(user, index) in filterUsers" :key="index">
+                    <td>
+                        <input type="checkbox" id="vehicle2" name="vehicle1" value="Bike" />
+                    </td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.address.city}}, {{user.address.street}}, {{user.address.zipcode}}</td>
+                    <td>{{user.phone}}</td>
+                    <td><a href="#">
+                        <img src="../assets/Dots.svg" alt="menu dots" srcset="" />
+                    </a></td>
+                </tr>
+                
+            </table>
     </div>
 </template>
 
 <script>
+import axios from "axios"
     export default {
    data(){
     return {
-        recipes: [
-      {title: 'Pizza',
-       description: 'Yummy pizza for those lazy days', 
-       ingredients: ['Dough', 'Tomato Paste', 'Cheese', 'Bell Pepper', 'Onion'],
-       cookingTime: 60,
-       img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'},
-    {title: 'Burritos', 
-     description: 'Healthy yet very tasty burritos', 
-     ingredients: ['Burritos', 'Kidney beans', 'Onion', 'Tomato', 'Bell Pepper'], 
-      cookingTime: 30,
-      img: 'https://images.unsplash.com/photo-1566740933430-b5e70b06d2d5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'},
-     {title: 'Tomato Soup', 
-      description: 'A tasty tomato soup for the cold winter',
-      ingredients: ['Tomatoes', 'Onion', 'Oregano'], 
-      cookingTime: 45,
-      img: 'https://images.unsplash.com/photo-1553881781-4c55163dc5fd?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'},
-      {title: 'Ice Cream', 
-       description: 'Just because... Ice Cream', 
-       ingredients: ['Whole milk', 'Cream', 'Eggs', 'Sugar'],
-       cookingTime: 120,
-       img: 'https://images.unsplash.com/photo-1515037028865-0a2a82603f7c?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1321&q=80'},
-    ]
+        users: [],
+        search:""
     }
    },
   
-  mounted: function() {
-    this.selectedCategory = 0;
-    this.selectedItem = 0;
-  },
+//   mounted: function() {
+//     this.selectedCategory = 0;
+//     this.selectedItem = 0;
+//   },
 
   computed: {
-	sortedArray() {
-		let sortedRecipes = this.recipes;
+    filterUsers:function(){
+        return this.users.filter((user)=>{
+            return user.name.match(this.search);
+        })
+    }
+	// sortedArray() {
+	// 	let sortedRecipes = this.recipes;
 		
-		sortedRecipes = sortedRecipes.sort((a,b) => {
-			let fa = a.title.toLowerCase(), fb = b.title.toLowerCase();
-			if (fa < fb) {
-				return -1
-			}
-			if (fa > fb) {
-				return 1
-			}
-			return 0
-		})
-	}
+	// 	sortedRecipes = sortedRecipes.sort((a,b) => {
+	// 		let fa = a.title.toLowerCase(), fb = b.title.toLowerCase();
+	// 		if (fa < fb) {
+	// 			return -1
+	// 		}
+	// 		if (fa > fb) {
+	// 			return 1
+	// 		}
+	// 		return 0
+	// 	})
+	// }
+},
+created(){
+    axios.get('https://jsonplaceholder.typicode.com/users').then(response => {
+        console.log(response.data)
+      this.users = response.data;
+    });
+    // var Info = []
+    // axios.get('https://jsonplaceholder.typicode.com/users').then(function(response){
+    //     console.log(response.data)
+    //     this.$set("users", response.data)
+    // console.log(this.users)
+    //      Info = response.data
+    //     console.log(Info)
+        
+        
+    //     // response.data = this.users
+    //     // console.log(this.users)
+    // })
+   
 }}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .h3 {
     width: 100%;
 }
@@ -81,7 +100,9 @@
     align-items: center;
 }
 
-input {
+
+
+input[type=search] {
     width: 100%;
     height: 40px;
     border: 1px solid #EAEAEA;
@@ -118,4 +139,29 @@ padding: 15px 20px;
     align-items: center;
     padding: 10px;
 }
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+
+}
+
+th, td {
+  text-align: left;
+  padding: 16px;
+  font-size: 14px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.avatar {
+    background-color: #2aaa0b;
+    // padding: 10px;
+    width: 100%;
+    border-radius: 50%;
+}
+/*  */
+
 </style>

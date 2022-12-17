@@ -58,7 +58,7 @@ a .active {
 }
 a {
     text-decoration: none;
-    color: #404040;
+    color: #404040 !important;
     font-weight: 600;
     font-size: 14px;
 }

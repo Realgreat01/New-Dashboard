@@ -16,13 +16,29 @@ import SideNav from '@/components/SideNav.vue';
 import NavComponent from '@/components/NavComponent.vue';
 import FooterComponent from '@/components/FooterComponent.vue';
 import UserComponent from '@/components/UserComponent.vue';
+import { mapGetters } from 'vuex';
+import axios from 'axios';
 
     export default {
     name: "RiderView",
     data() {
         return {};
     },
-    components: { SideNav, NavComponent, FooterComponent, UserComponent }
+    components: { SideNav, NavComponent, FooterComponent, UserComponent },
+    async created(){
+      this.$store.dispatch("user", response.data)
+      const response = await axios.get("user", {
+        headers: { 
+          Authorization: "Bearer" + localStorage.getItem ("user")
+        }
+        
+      });
+    },
+//     computed :{
+//       computed: {
+//     ...mapGetters(["user"])
+//   }
+//     }
 }
 </script>
 

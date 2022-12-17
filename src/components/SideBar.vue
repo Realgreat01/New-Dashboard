@@ -1,25 +1,27 @@
 <template>
     <div class="bar_container">
-        <div class="sidebar_links">
-            <div class="links_links active">
-                <router-link to="/dashboard"> Dashboard</router-link>
-            </div>
-            <div class="links_links">
-                <router-link to="/riders"> Users</router-link>
-            </div>
-            <div class="links_links">
-                <router-link to="/networks"> Networks</router-link>
-            </div>
-            <div class="links_links">
-                <router-link to="/organizations"> Organizations</router-link>
-            </div>
-            <div class="links_links">
-                <router-link to="/drivers"> Drivers</router-link>
-            </div>
+        <div class="bar_content">
+            <ul>
+                <li class="active">
+                    <router-link to="/dashboard" class="active"> Dashboard</router-link>
+                </li>
+                <li>
+                    <router-link to="/riders"> Users</router-link>
+                </li>
+                <li>
+                    <router-link to="/networks"> Networks</router-link>
+                </li>
+                <li>
+                    <router-link to="/organizations"> Organizations</router-link>
+                </li>
+                <li>
+                    <router-link to="/drivers"> Drivers</router-link>
+                </li>
+            </ul>
+            <button @click="logout" class="logout_btn">
+                Logout
+            </button>
         </div>
-        <button @click="logout" class="logout_btn">
-            Logout
-        </button>
     </div>
 </template>
 <script>
@@ -44,53 +46,52 @@ export default {
 }
 </script>
 <style scoped>
-.bar_container {
-    background: #ffffff;
-    width: 20%;
-    height: 100vh;
-    border-left: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    overflow-x: hidden;
-    padding-top: 20px;
+li .active {
+    background-color: #f9f9f9;
 }
-
+a .active {
+    color: #2AAA0B;
+}
 a {
     text-decoration: none;
-    font-size: 14px;
-    color: #2AAA0B;
+    color: #404040 !important;
     font-weight: 600;
+    font-size: 14px;
 }
-
-.sidebar_links {
-    display: flex;
-    flex-direction: column;
-    margin-top: 30px;
-    /* gap: 10px; */
-}
-
-.links_links {
-    display: block;
+li {
+    list-style-type: none;
     width: 100%;
-    justify-content: space-between !important;
-    padding: 20px 0 20px 30px;
-    cursor: pointer !important;
-}
+    padding: 20px;
 
+}
+ul {
+display: flex;
+flex-direction: column;
+/* gap: 10px; */
+justify-content: flex-start;
+align-items: flex-start;
+width: 100%;
+   
+}
 .logout_btn {
     cursor: pointer !important;
-    background: linear-gradient(135deg, #2AAA0B 0%, #2AAA0B 100%);
-    width: 100%;
+    background: #2AAA0B;
+    width: 100% !important;
     text-align: center;
-    position: absolute;
+    position: relative;
     height: 50px;
     font-weight: 600;
     color: #ffffff;
     outline: none;
     border: none;
-    position: absolute;
     bottom: 0;
+}
+.bar_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 90vh!important;
+    padding-top: 30px;
 }
 </style>
