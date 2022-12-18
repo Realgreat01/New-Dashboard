@@ -50,9 +50,10 @@ import axios from "axios"
             })
             .then((response) => {
                     if (response.status === 200) {
-                        this.$toasted.success("Success!");
+                        this.$toasted.success("Logged In!");
                         localStorage.setItem("token", response.data.access_token);
                         this.$router.push('/dashboard')
+                        this.$store.dispatch("user", response.data.id)
                     } else {
                         this.$toasted.error("oops an error occurred");
                         return false;
