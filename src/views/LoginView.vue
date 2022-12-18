@@ -67,15 +67,15 @@ import axios from "axios"
                 this.$toasted.error("Please enter your password");
                 return false;
             }
-            await axios.post("http://34.192.182.160:8010/admin/login", {
+            await axios.post("http://3.85.252.84/api/v1/users/admin/login", {
                 email:this.email,
                 password: this.password
             })
             .then((response) => {
-                    if (response.status === 200 && response.data.status === "success") {
+                    if (response.status === 200) {
                         this.$toasted.success("Logged In!");
-                        localStorage.setItem("token", response.data.data._token);
-                        this.$store.dispatch("user", response.data.user)
+                        localStorage.setItem("token", response.data.access_token);
+                        this.$store.dispatch("user", response.data.id)
                         this.$router.push('/dashboard')
                     } else {
                         this.$toasted.error("oops an error occurred");
@@ -85,8 +85,8 @@ import axios from "axios"
                 })
                 .catch((error) => {
                     console.log(error);
-                    if (error.response.data.message) {
-                        this.$toasted.error(error.response.data.message);
+                    if (error.response.data.detail) {
+                        this.$toasted.error(error.response.data.detail);
                     } else {
                         this.$toasted.error("An error occured. Please, try again later.");
                     }
