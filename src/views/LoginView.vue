@@ -7,7 +7,12 @@
             </div>
             <form @submit.prevent="handleSubmit" class="form_group">
                 <input v-model="email" type="email" id="email" class="form-control" placeholder="Email" >
-                <input v-model="password" type="password" class="form-control" placeholder="Password" >
+                <!-- <input v-model="password" type="password" class="form-control" placeholder="Password" > -->
+                <div class="password_div">
+                    <input v-model="password" :type="type" class="form-control" placeholder="Your password">
+                    <span  v-if="open"> <button @click.prevent='showPassword' class="see_button"><img src= "../assets/eyes_close.svg" alt=""></button></span>
+                    <span v-if="close"> <button @click.prevent='showPassword' class="see_button"><img src= "../assets/eyes_open.svg" alt=""></button></span>
+                </div>
                 <input type="submit" class="greach_button">
                 <router-link to="/forgot">Forgot Password?</router-link>
             </form>
@@ -22,10 +27,28 @@ import axios from "axios"
       data() {
         return {
             email:"",
-            password:""
+            password:"",
+            type: "password",
+            btnText: "show",
+            close:false,
+            open:true
+             
         } 
       },
       methods:{
+        showPassword() {
+            if(this.type === "password") {
+                this.type = 'text'
+                this.btnText = "hide"
+                this.close= true
+                this.open= false
+            } else {
+                this.type = 'password'
+                this.btnText = "show"
+                this.close = false
+                this.open = true
+            }
+        },
         validateEmail(email) {
             const re =
                 /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))*$/;
@@ -74,6 +97,37 @@ import axios from "axios"
 </script>
 
 <style scoped>
+.see_button {
+    height: 50px;
+    border: none;
+    color: #ffffff;
+    background: none;
+    padding: 0 20px;
+    cursor: pointer;
+}
+
+.form-control {
+    border: none;
+    background: #ffffff;
+    margin: 0;
+    padding: 7px 8px;
+    font-size: 14px;
+    color: inherit;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    height: 50px;
+    padding: 0 0 0 15px;
+    width: 100%;
+}
+.password_div {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+}
+
 .container {
     height: 100vh;
     display: flex;
