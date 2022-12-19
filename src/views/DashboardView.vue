@@ -28,18 +28,17 @@ import SideBar from '@/components/SideBar.vue';
    },
    components: { SideNav, NavComponent, FooterComponent, UserComponent, HelloWorld, SideBar },
    async created(){
-     this.$store.dispatch("user", response.data)
-     const response = await axios.get("user", {
+     const admin_id = localStorage.getItem("admin_id")
+     const response = await axios.get("http://34.192.182.160:8010/admin/user/"+admin_id, {
        headers: { 
-         Authorization: "Bearer" + localStorage.getItem ("user")
+         Authorization: "Bearer " + localStorage.getItem ("token")
        }
        
      });
+     this.$store.dispatch("user", response.data.data);
    },
    computed :{
-     computed: {
    ...mapGetters(["user"])
- }
    }
 }
 </script>

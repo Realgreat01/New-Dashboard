@@ -29,7 +29,7 @@ import axios from 'axios';
       this.$store.dispatch("user", response.data)
       const response = await axios.get("user", {
         headers: { 
-          Authorization: "Bearer" + localStorage.getItem ("user")
+          Authorization: "Bearer " + localStorage.getItem ("user")
         }
         
       });

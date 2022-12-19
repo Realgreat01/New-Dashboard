@@ -75,7 +75,7 @@ import axios from "axios"
                     if (response.status === 200) {
                         this.$toasted.success("Logged In!");
                         localStorage.setItem("token", response.data.access_token);
-                        this.$store.dispatch("user", response.data.id)
+                        localStorage.setItem("admin_id", response.data.id);
                         this.$router.push('/dashboard')
                     } else {
                         this.$toasted.error("oops an error occurred");
