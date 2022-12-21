@@ -30,7 +30,7 @@
 import { mapGetters } from 'vuex';
 // import store from '@/store';
 export default {
-    name: "SideBar",
+    name: "SideNav",
     data() {
         return {
         }
@@ -38,9 +38,9 @@ export default {
     methods: {
       async logout (){
         localStorage.removeItem("token");
-        this.$store.dispatch("user", null).
-        this.$router.push('/login')
-        await this.$store.dispatch('LogOut')
+        this.$store.dispatch("user", null);
+        this.$router.push('/login');
+        // await this.$store.dispatch('LogOut')
       },
     },
     computed: {

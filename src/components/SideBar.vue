@@ -35,8 +35,8 @@ export default {
     methods: {
       async logout (){
         localStorage.removeItem("token");
-        this.$store.dispatch("user", null)
-        this.$router.push('/login')
+        this.$store.dispatch("user", null);
+        this.$router.push('/login');
         // await this.$store.dispatch('LogOut')
       },
     },
