@@ -13,7 +13,7 @@
                     <span  v-if="open"> <button @click.prevent='showPassword' class="see_button"><img src= "../assets/eyes_close.svg" alt=""></button></span>
                     <span v-if="close"> <button @click.prevent='showPassword' class="see_button"><img src= "../assets/eyes_open.svg" alt=""></button></span>
                 </div>
-                <input type="submit" class="greach_button">
+                <input type="submit" value="Login" class="greach_button">
                 <router-link to="/forgot">Forgot Password?</router-link>
             </form>
         </div>

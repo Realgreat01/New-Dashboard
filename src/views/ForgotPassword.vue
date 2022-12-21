@@ -41,6 +41,7 @@ export default {
                 this.$toasted.error("Invalid email address");
                 return false;
             }
+            this.$toasted.error("Not allowing admin users to change password at this time. Contact Ishola");
         },
     }
 }
