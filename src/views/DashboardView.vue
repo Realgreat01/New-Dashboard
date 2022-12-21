@@ -16,7 +16,7 @@ import SideNav from '@/components/SideNav.vue';
 import NavComponent from '@/components/NavComponent.vue';
 import FooterComponent from '@/components/FooterComponent.vue';
 import UserComponent from '@/components/UserComponent.vue';
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 import axios from 'axios';
 import HelloWorld from '@/components/HelloWorld.vue';
 import SideBar from '@/components/SideBar.vue';
@@ -26,20 +26,14 @@ import SideBar from '@/components/SideBar.vue';
    data() {
        return {};
    },
+   methods: {
+    ...mapActions(['fetchUser'])
+   },
    components: { SideNav, NavComponent, FooterComponent, UserComponent, HelloWorld, SideBar },
    async created(){
-     const admin_id = localStorage.getItem("admin_id")
-     const response = await axios.get("http://34.192.182.160:8010/admin/user/"+admin_id, {
-       headers: { 
-         Authorization: "Bearer " + localStorage.getItem ("token")
-       }
-       
-     });
-     this.$store.dispatch("user", response.data.data);
-   },
-   computed :{
-   ...mapGetters(["user"])
+     await this.fetchUser();
    }
+   
 }
 </script>
 

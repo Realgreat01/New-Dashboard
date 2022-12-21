@@ -34,11 +34,6 @@ import axios from 'axios';
       });
       this.$store.dispatch("user", response.data.data);
     },
-//     computed :{
-//       computed: {
-//     ...mapGetters(["user"])
-//   }
-//     }
 }
 </script>
 

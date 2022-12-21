@@ -2,7 +2,7 @@
   <div class="containerss">
       <div class="greeting">
       <div>
-        <p>Hi {{user.name}}</p>
+        <p v-if="user" >Hi, {{user.email}}</p>
         <h1>Welcome Back</h1>
       </div>
       <div></div>
@@ -78,6 +78,7 @@
 
 <script>
 import apexchart from 'vue-apexcharts'
+import { mapState } from 'vuex';
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -85,11 +86,6 @@ var yyyy = today.getFullYear();
 export default {
   name: "HelloWorld",
   data: () => ({
-    user: {
-      name: "Tomi Arayomi",
-      initials: "TA",
-      userName: "Yomi"
-    },
     dashboard: {
       organization: "29k",
       drivers: "437k",
@@ -111,7 +107,11 @@ export default {
       name: 'series-1',
       data: [30, 40, 45, 50, 49, 60, 70, 91]
     }]
-  })}
+  }),
+    computed :{
+      ...mapState(["user"])
+   }
+   }
 </script>
 
 <style  scoped>
