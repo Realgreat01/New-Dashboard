@@ -21,19 +21,18 @@ import axios from 'axios';
 import HelloWorld from '@/components/HelloWorld.vue';
 import SideBar from '@/components/SideBar.vue';
 
-   export default {
-   name: "RiderView",
-   data() {
-       return {};
-   },
-   methods: {
-    ...mapActions(['fetchUser'])
-   },
-   components: { SideNav, NavComponent, FooterComponent, UserComponent, HelloWorld, SideBar },
-   async created(){
-     await this.fetchUser();
-   }
-   
+export default {
+  name: "DashboardView",
+  data() {
+      return {};
+  },
+  methods: {
+  ...mapActions(['fetchUser'])
+  },
+  components: { SideNav, NavComponent, FooterComponent, UserComponent, HelloWorld, SideBar },
+  async created(){
+    await this.fetchUser();
+  }
 }
 </script>
 

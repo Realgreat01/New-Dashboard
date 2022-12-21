@@ -13,18 +13,22 @@
                     <th>Id</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Active</th>
                     <th>Phone Number</th>
+                    <th>Designation</th>
+                    <th>State</th>
+                    <th>Status</th>
                 </tr>
                 <tr v-for="(user, index) in filterUsers" :key="index">
                     <td>
                         <input type="checkbox" id="vehicle2" name="vehicle1" value="Bike" />
                     </td>
-                    <td>{{user.id}}</td>
-                    <td>{{user.email}}</td>
-                    <td>{{user.phone_number}}</td>
-                    <td>{{user.is_active}}</td>
-                    <td>{{user.created_at}}</td>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.first_name }} {{ user.last_name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.phone_number }}</td>
+                    <td>{{ user.designation }}</td>
+                    <td>{{ user.state }}</td>
+                    <td>{{ user.is_active }}</td>
                     <td><a href="#">
                         <img src="../assets/Dots.svg" alt="menu dots" srcset="" />
                     </a></td>
@@ -40,6 +44,7 @@ import axios from "axios"
    data(){
     return {
         users: [],
+        userprofiles: [],
         search:""
     }
    },
@@ -51,7 +56,12 @@ import axios from "axios"
 
   computed: {
     filterUsers:function(){
-        return this.users.filter((user)=>{
+        this.userWithProfiles = this.users.map(
+            user => Object.assign(
+                user, this.userprofiles.find(userprofile => userprofile.user_id == user.id)
+            )
+        );
+        return this.userWithProfiles.filter((user)=>{
             return user.email.match(this.search);
         })
     }
@@ -78,6 +88,14 @@ created(){
     }).then(response => {
         // console.log(response.data)
       this.users = response.data.data;
+    });
+
+    axios.get("http://34.192.182.160:8010/admin/userprofiles", {
+        headers: { 
+          Authorization: "Bearer " + localStorage.getItem ("token")
+        }
+    }).then(response => {
+      this.userprofiles = response.data.data;
     });
     // var Info = []
     // axios.get('https://jsonplaceholder.typicode.com/users').then(function(response){
