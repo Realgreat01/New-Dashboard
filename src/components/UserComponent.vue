@@ -22,7 +22,7 @@
                     <td>
                         <input type="checkbox" id="vehicle2" name="vehicle1" value="Bike" />
                     </td>
-                    <td>{{ user.id }}</td>
+                    <td>{{ user.uid }}</td>
                     <td>{{ user.first_name }} {{ user.last_name }}</td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.phone_number }}</td>
@@ -56,13 +56,14 @@ import axios from "axios"
 
   computed: {
     filterUsers:function(){
+        this.users  = this.users.map(({id:uid, ...row}) => ({uid, ...row}));
         this.userWithProfiles = this.users.map(
-            user => Object.assign(
-                user, this.userprofiles.find(userprofile => userprofile.user_id == user.id)
+            user => Object.assign({},
+                user, this.userprofiles.find(userprofile => userprofile.user_id == user.uid)
             )
         );
-        return this.userWithProfiles.filter((user)=>{
-            return user.email.match(this.search);
+        return this.userWithProfiles.filter((userWithProfile)=>{
+            return userWithProfile.email.match(this.search);
         })
     }
 	// sortedArray() {
