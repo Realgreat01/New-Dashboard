@@ -42,10 +42,10 @@ export default {
         this.$router.push('/login')
         await this.$store.dispatch('LogOut')
       },
-      computed: {
+    },
+    computed: {
         ...mapGetters(["user"])
       }
-    },
 }
 </script>
 

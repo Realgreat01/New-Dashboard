@@ -10,19 +10,21 @@
                     <td>
                         <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
                     </td>
+                    <th>Id</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Location</th>
-                    <th>Phone</th>
+                    <th>Active</th>
+                    <th>Phone Number</th>
                 </tr>
                 <tr v-for="(user, index) in filterUsers" :key="index">
                     <td>
                         <input type="checkbox" id="vehicle2" name="vehicle1" value="Bike" />
                     </td>
-                    <td>{{user.name}}</td>
+                    <td>{{user.id}}</td>
                     <td>{{user.email}}</td>
-                    <td>{{user.address.city}}, {{user.address.street}}, {{user.address.zipcode}}</td>
-                    <td>{{user.phone}}</td>
+                    <td>{{user.phone_number}}</td>
+                    <td>{{user.is_active}}</td>
+                    <td>{{user.created_at}}</td>
                     <td><a href="#">
                         <img src="../assets/Dots.svg" alt="menu dots" srcset="" />
                     </a></td>
@@ -50,7 +52,7 @@ import axios from "axios"
   computed: {
     filterUsers:function(){
         return this.users.filter((user)=>{
-            return user.name.match(this.search);
+            return user.email.match(this.search);
         })
     }
 	// sortedArray() {
@@ -69,9 +71,13 @@ import axios from "axios"
 	// }
 },
 created(){
-    axios.get('https://jsonplaceholder.typicode.com/users').then(response => {
-        console.log(response.data)
-      this.users = response.data;
+    axios.get("http://34.192.182.160:8010/admin/users", {
+        headers: { 
+          Authorization: "Bearer " + localStorage.getItem ("token")
+        }
+    }).then(response => {
+        // console.log(response.data)
+      this.users = response.data.data;
     });
     // var Info = []
     // axios.get('https://jsonplaceholder.typicode.com/users').then(function(response){
