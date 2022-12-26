@@ -83,6 +83,29 @@ var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
+
+const getDAshboard = await axios.get("http://34.192.182.160:8010/admin/dashboard", 
+{
+  headers:
+  { 
+     Authorization: "Bearer" + localStorage.getItem ("user")
+  }
+});
+let organization = 0;
+let drivers = 0;
+let users = 0;
+let public_network = 0;
+let private_network = 0;
+if (getDAshboard.status === 200 && getDAshboard.data.status === "success") {
+    getDAshboard = getDAshboard.data.data;
+    organization = getDAshboard?.organization;
+    drivers = getDAshboard?.drivers;
+    users = getDAshboard?.users;
+    public_network = getDAshboard?.public_network;
+    private_network = getDAshboard?.private_network;
+}
+
+
 export default {
   name: "HelloWorld",
   data: () => ({
@@ -92,11 +115,11 @@ export default {
       userName: "Yomi"
     },
     dashboard: {
-      organization: "29k",
-      drivers: "437k",
-      users: "56",
-      public_network: "122k",
-      private_network: "130k",
+      organization,
+      drivers,
+      users,
+      public_network,
+      private_network,
       lastupdate: yyyy,
     },
     options: {
