@@ -1,12 +1,12 @@
 <template>
-    <div class="bar_container">
+        <div class="bar_container">
         <div class="bar_content">
             <ul>
-                <li class="active">
-                    <router-link to="/dashboard" class="active"> Dashboard</router-link>
-                </li>
                 <li>
-                    <router-link to="/riders"> Users</router-link>
+                    <router-link to="/dashboard"> Dashboard</router-link>
+                </li>
+                <li class="active">
+                    <router-link to="/riders" class="active"> Users</router-link>
                 </li>
                 <li>
                     <router-link to="/networks"> Networks</router-link>
@@ -22,12 +22,15 @@
                 Logout
             </button>
         </div>
+      
     </div>
 </template>
+
 <script>
 import { mapGetters } from 'vuex';
+// import store from '@/store';
 export default {
-    name: "SideBar",
+    name: "SideNav",
     data() {
         return {
         }
@@ -42,9 +45,10 @@ export default {
     },
     computed: {
         ...mapGetters(["user"])
-    }
+      }
 }
 </script>
+
 <style scoped>
 li .active {
     background-color: #f9f9f9;

@@ -7,8 +7,13 @@
             </div>
             <form @submit.prevent="handleSubmit" class="form_group">
                 <input v-model="email" type="email" id="email" class="form-control" placeholder="Email" >
-                <input v-model="password" type="password" class="form-control" placeholder="Password" >
-                <input type="submit" class="greach_button">
+                <!-- <input v-model="password" type="password" class="form-control" placeholder="Password" > -->
+                <div class="password_div">
+                    <input v-model="password" :type="type" class="form-control" placeholder="Your password">
+                    <span  v-if="open"> <button @click.prevent='showPassword' class="see_button"><img src= "../assets/eyes_close.svg" alt=""></button></span>
+                    <span v-if="close"> <button @click.prevent='showPassword' class="see_button"><img src= "../assets/eyes_open.svg" alt=""></button></span>
+                </div>
+                <input type="submit" value="Login" class="greach_button">
                 <router-link to="/forgot">Forgot Password?</router-link>
             </form>
         </div>
@@ -22,10 +27,28 @@ import axios from "axios"
       data() {
         return {
             email:"",
-            password:""
+            password:"",
+            type: "password",
+            btnText: "show",
+            close:false,
+            open:true
+             
         } 
       },
       methods:{
+        showPassword() {
+            if(this.type === "password") {
+                this.type = 'text'
+                this.btnText = "hide"
+                this.close= true
+                this.open= false
+            } else {
+                this.type = 'password'
+                this.btnText = "show"
+                this.close = false
+                this.open = true
+            }
+        },
         validateEmail(email) {
             const re =
                 /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))*$/;
@@ -44,14 +67,15 @@ import axios from "axios"
                 this.$toasted.error("Please enter your password");
                 return false;
             }
-            await axios.post("http://34.192.182.160:8010/admin/login", {
+            await axios.post("http://3.85.252.84/api/v1/users/admin/login", {
                 email:this.email,
                 password: this.password
             })
             .then((response) => {
-                    if (response.status === 200 && response.data.status === "success") {
-                        this.$toasted.success("Success!");
-                        localStorage.setItem("token", response.data.data._token);
+                    if (response.status === 200) {
+                        this.$toasted.success("Logged In!");
+                        localStorage.setItem("token", response.data.access_token);
+                        localStorage.setItem("admin_id", response.data.id);
                         this.$router.push('/dashboard')
                     } else {
                         this.$toasted.error("oops an error occurred");
@@ -61,8 +85,8 @@ import axios from "axios"
                 })
                 .catch((error) => {
                     console.log(error);
-                    if (error.response.data.message) {
-                        this.$toasted.error(error.response.data.message);
+                    if (error.response.data.detail) {
+                        this.$toasted.error(error.response.data.detail);
                     } else {
                         this.$toasted.error("An error occured. Please, try again later.");
                     }
@@ -73,6 +97,37 @@ import axios from "axios"
 </script>
 
 <style scoped>
+.see_button {
+    height: 50px;
+    border: none;
+    color: #ffffff;
+    background: none;
+    padding: 0 20px;
+    cursor: pointer;
+}
+
+.form-control {
+    border: none;
+    background: #ffffff;
+    margin: 0;
+    padding: 7px 8px;
+    font-size: 14px;
+    color: inherit;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    height: 50px;
+    padding: 0 0 0 15px;
+    width: 100%;
+}
+.password_div {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+}
+
 .container {
     height: 100vh;
     display: flex;

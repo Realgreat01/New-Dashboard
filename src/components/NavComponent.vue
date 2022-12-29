@@ -3,21 +3,16 @@
         <p></p>
         <p></p>
         <p></p>
-        <p>{{user.name}}</p>
+        <p v-if="user" >{{ user.email }}</p>
     </div>
 </template>
 <script>
+import { mapState } from 'vuex';
 export default {
     name: "NavComponent",
-    data() {
-        return {
-            user: {
-                name: "Tomi Arayomi",
-                initials: "TA"
-            }
-        }
-    },
-   
+    computed :{
+        ...mapState(["user"])
+   }
 }
 </script>
 <style scoped>
