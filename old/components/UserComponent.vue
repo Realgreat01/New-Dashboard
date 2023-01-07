@@ -114,7 +114,7 @@ created(){
 }}
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .h3 {
     width: 100%;
 }
@@ -183,7 +183,7 @@ tr:nth-child(even) {
 }
 .avatar {
     background-color: #2aaa0b;
-    // padding: 10px;
+    /* padding: 10px; */
     width: 100%;
     border-radius: 50%;
 }

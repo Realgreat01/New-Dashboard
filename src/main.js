@@ -1,19 +1,24 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import Toasted from 'vue-toasted';
-import axios from 'axios'
-import VueApexCharts from 'vue-apexcharts'
-Vue.use(VueApexCharts)
+import { createApp } from "vue";
+import { createPinia } from "pinia";
 
-Vue.component('apexchart', VueApexCharts)
-Vue.config.productionTip = false
-Vue.use(axios)
-Vue.use(Toasted,{duration: 10000, keepOnHover: true, position: "top-right", fullWidth:true, theme:"toasted-primary", singleton:true, });
+import App from "./App.vue";
+import router from "./router";
+import Message from "vue-m-message";
+import "./assets/main.css";
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+// import "./tailwind.scss";
+import "vue-m-message/dist/style.css";
+import "material-icons/iconfont/material-icons.css";
+
+const VMessageOptions = {
+  name: "admin-dashboard",
+  defaultOptions: { closable: true, position: "top-right", width: "300px" },
+};
+
+const app = createApp(App);
+
+app.use(Message, VMessageOptions);
+app.use(createPinia());
+app.use(router);
+
+app.mount("#app");
