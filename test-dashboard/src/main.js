@@ -1,14 +1,24 @@
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+import { createApp } from "vue";
+import { createPinia } from "pinia";
 
-import App from './App.vue'
-import router from './router'
+import App from "./App.vue";
+import router from "./router";
+import Message from "vue-m-message";
+import "./assets/main.css";
 
-import './assets/main.css'
+// import "./tailwind.scss";
+import "vue-m-message/dist/style.css";
+import "material-icons/iconfont/material-icons.css";
 
-const app = createApp(App)
+const VMessageOptions = {
+  name: "admin-dashboard",
+  defaultOptions: { closable: true, position: "top-right", width: "300px" },
+};
 
-app.use(createPinia())
-app.use(router)
+const app = createApp(App);
 
-app.mount('#app')
+app.use(Message, VMessageOptions);
+app.use(createPinia());
+app.use(router);
+
+app.mount("#app");
