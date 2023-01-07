@@ -49,15 +49,16 @@ import axios from "axios"
                 password: this.password
             })
             .then((response) => {
-                    if (response.status === 200 && response.data.status === "ok") {
-                        this.$toasted.success("Success!");
+                    if (response.status === 200) {
+                        this.$toasted.success("Login successful");
                         this.$router.push('/dashboard')
                     } else {
                         this.$toasted.error("oops an error occurred");
                         return false;
                     }
                     console.log(response);                       
-                })
+            })
+                
                 .catch((error) => {
                     console.log(error);
                     this.$toasted.error("An error occured. Please, try again later.");
