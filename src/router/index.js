@@ -18,17 +18,18 @@ const routes = [
     name: 'home',
     component: HomeView
   },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  },
+  // {
+  //   path: '/about',
+  //   name: 'about',
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+  // },
   {
     path: '/login',
     name: 'login',
+    // meta:{auth:false},
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -45,37 +46,45 @@ const routes = [
   {
     path: '*',
     name: 'Not Found',
-    component: NotFound
+    component: NotFound,
+    // meta:{auth:true},
   },
   {
     path: '/riders',
     name: 'Riders',
-    component: Riders
+    component: Riders,
+    // meta:{auth:true},
   },
   {
     path: '/organizations',
     name: 'Organizations',
-    component: Organizations
+    component: Organizations,
+    // meta:{auth:true},
   },
   {
     path: '/users',
     name: 'Users',
-    component: Users
+    component: Users,
+    // meta:{auth:true},
   },
   {
     path: '/drivers',
     name: 'Drivers',
-    component: Drivers
+    component: Drivers,
+    // meta:{auth:true},
   },
   {
     path: '/networks',
     name: 'Networks',
-    component: Networks
+    component: Networks,
+    // meta:{auth:true},
   },
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: Dashboard
+    component: Dashboard,
+    // meta:{auth:true},
+
   },
   {
     path: '/logout',
@@ -83,6 +92,10 @@ const routes = [
     component: Logout
   }
 ]
+
+// router.beforeEach(()=>{
+
+// })
 
 const router = new VueRouter({
   mode: 'history',

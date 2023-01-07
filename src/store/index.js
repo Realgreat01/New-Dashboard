@@ -1,45 +1,37 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios';
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user: null,
-    token:null
+    user: {}
   },
   getters: {
-    isLoggedIn(state) {
-      return !!state.token;
-    },
-    // isAuthenticated: state => !!state.user,    
-    // StatePosts: state => state.posts,
-    // StateUser: state => state.user,
+    user:(state) => {
+      return state.user;
+    }
   },
   mutations: {
-    setUser(state, user) {
-      state.user = user;
-    },
-    setToken(state, token) {
-      state.token = token;
-    },
-  LogOut(state){
-      state.user = null
-  },
+   user (state, user){
+    state.user = user
+   }
   },
   actions: {
-    async LogIn({commit}, User) {
-      await axios.post('login', User)
-      // await commit('setUser', User.get('username'))
-    },
-    async CreatePost({dispatch}, post) {
-      await axios.post("post", post)
-      await dispatch('GetPosts')
-    },
-    async LogOut({commit}){
-      let user = null
-      commit('logout', user)
-    }    
+   async fetchUser({commit}) {
+      const admin_id = localStorage.getItem("admin_id")
+      const response = await axios.get("http://34.192.182.160:8010/admin/user/"+admin_id, {
+        headers: { 
+          Authorization: "Bearer " + localStorage.getItem ("token")
+        }
+      });
+      commit('user', response.data.data);
+      return Promise.resolve();
+   },
+   user(context, user){
+    context.commit("user", user)
+   }
   },
   modules: {
   }
