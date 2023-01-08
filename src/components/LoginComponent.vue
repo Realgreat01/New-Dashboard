@@ -2,20 +2,37 @@
   <div class="container">
     <div class="login_card">
       <div class="space">
-        <h1><span>Greach</span></h1>
+        <h1><span class="text-3xl font-bold">Greach</span></h1>
         <small>Welcome Back, Please login to your account.</small>
       </div>
       <form @submit.prevent="handleSubmit" class="form_group">
-        <input
-          v-model="formResponse[input.value]"
-          :type="input.type"
-          class="form-control"
-          :placeholder="input.title"
+        <div
+          class="form_group relative w-full"
           v-for="(input, index) in loginForm"
           :key="index"
-        />
-
-        <input type="submit" value="Login" class="greach_button" />
+        >
+          <input
+            v-model="formResponse[input.value]"
+            :type="input.type"
+            class="form-control"
+            :placeholder="input.title"
+          />
+          <div
+            class="absolute right-4 flex cursor-pointer"
+            v-if="input.value === 'password'"
+          >
+            <i
+              class="material-icons"
+              @click="input.type = 'text'"
+              v-if="input.type === 'password'"
+              >visibility</i
+            >
+            <i class="material-icons" @click="input.type = 'password'" v-else
+              >visibility_off</i
+            >
+          </div>
+        </div>
+        <ButtonComponent :disabled="disabled" />
         <router-link to="/forgot">Forgot Password?</router-link>
       </form>
     </div>
@@ -25,43 +42,54 @@
 <script setup>
 import axios from "axios";
 import Message from "vue-m-message";
+import { useRouter } from "vue-router";
+import ButtonComponent from "@/components/reusables/ButtonComponent.vue";
 import { ref, reactive } from "vue";
 
 const loginForm = ref([
   { title: "Email", value: "email", type: "text" },
   { title: "Your Password", value: "password", type: "password" },
 ]);
+
+const disabled = ref(false);
+
+const router = useRouter();
+
 const formResponse = reactive({
-  email: "",
-  password: "",
+  email: "hello@greach.co",
+  password: "anything",
 });
+
 const validateEmail = (email) => {
   const re =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))*$/;
   return re.test(email);
 };
+
 const handleSubmit = async () => {
+  disabled.value = true;
   if (formResponse.email === "") return Message.error("Please fill your email");
-  if (validateEmail(formResponse.email) === false)
+  if (!validateEmail(formResponse.email))
     return Message.error("Invalid email address");
   if (formResponse.password == "")
     return Message.error("Please enter your password");
-	try {
-    const response = await axios.post(
-      import.meta.env.VITE_API_URL + "admin/login",
+
+  try {
+    const {data} = await axios.post(
+      import.meta.env.VITE_API_URL + "login",
       formResponse
     );
-    
-		console.log(response);
-      return response;
-    // }
+    Message.success("Login Successful");
+    const { _token } = data.data;
+    localStorage.setItem("auth-token", _token);
+    disabled.value = false;
+    return setTimeout(() => router.push("/admin"), 500);
   } catch (error) {
-    const {data} = error.response
-    if (data) {
-      Message.error(data.message);
-    } else {
-      Message.error("An error occured. Please, try again later.");
-    }
+    console.log(error)
+    disabled.value = false;
+    const { data } = error.response;
+    if (data) return Message.error(data.message);
+    else return Message.error("An error occured. Please, try again later.");
   }
 };
 </script>

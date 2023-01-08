@@ -18,23 +18,7 @@
                     <th>State</th>
                     <th>Status</th>
                 </tr>
-                <tr v-for="(user, index) in filterUsers" :key="index">
-                    <td>
-                        <input type="checkbox" id="vehicle2" name="vehicle1" value="Bike" />
-                    </td>
-                    <td>{{ user.uid }}</td>
-                    <td>{{ user.first_name }} {{ user.last_name }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.phone_number }}</td>
-                    <td>{{ user.designation }}</td>
-                    <td>{{ user.state }}</td>
-                    <td>{{ user.is_active }}</td>
-                    <td><a href="#">
-                        <img src="../assets/Dots.svg" alt="menu dots" srcset="" />
-                    </a></td>
-                </tr>
-                
-            </table>
+                </table>
     </div>
 </template>
 
@@ -56,15 +40,15 @@ import axios from "axios"
 
   computed: {
     filterUsers:function(){
-        this.users  = this.users.map(({id:uid, ...row}) => ({uid, ...row}));
-        this.userWithProfiles = this.users.map(
-            user => Object.assign({},
-                user, this.userprofiles.find(userprofile => userprofile.user_id == user.uid)
-            )
-        );
-        return this.userWithProfiles.filter((userWithProfile)=>{
-            return userWithProfile.email.match(this.search);
-        })
+        // this.users  = this.users.map(({id:uid, ...row}) => ({uid, ...row}));
+        // this.userWithProfiles = this.users.map(
+        //     user => Object.assign({},
+        //         user, this.userprofiles.find(userprofile => userprofile.user_id == user.uid)
+        //     )
+        // );
+        // return this.userWithProfiles.filter((userWithProfile)=>{
+        //     return userWithProfile.email.match(this.search);
+        // })
     }
 	// sortedArray() {
 	// 	let sortedRecipes = this.recipes;
@@ -103,7 +87,7 @@ created(){
     //     console.log(response.data)
     //     this.$set("users", response.data)
     // console.log(this.users)
-    //      Info = response.data
+    //      Info = response.data 
     //     console.log(Info)
         
         

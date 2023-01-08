@@ -18,6 +18,10 @@
   [multiple],
   textarea,
   select {
-@apply focus:ring-brand;
+    @apply focus:ring-brand;
   }
+}
+
+.test {
+  color: "#10404DE";
 }

@@ -1,0 +1,41 @@
+<template>
+  <button
+    class="block w-full rounded-lg text-center text-[1.6rem] text-white"
+    style="height: 50px"
+    :disabled="disabled"
+  >
+    <div
+      class="flex h-full w-full gap-x-8  items-center justify-center rounded-lg bg-green-500"
+      v-if="!disabled"
+    >
+      <component :is="component"  />
+      <p>{{ text }}</p>
+    </div>
+    <div
+      class="border-1 flex h-full w-full cursor-not-allowed items-center justify-center rounded border-green-500 bg-white"
+      v-else
+    >
+      <ButtonSpinner />
+    </div>
+  </button>
+</template>
+
+<script setup>
+import ButtonSpinner from "@/assets/icons/ButtonSpinner.vue";
+defineProps({
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  text: {
+    type: String,
+    default: "Login",
+  },
+  component: {
+    type: Object,
+  },
+});
+</script>
+
+<style lang="scss" scoped>
+</style>

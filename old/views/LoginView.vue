@@ -215,17 +215,6 @@ input[type='password'] {
 	width: 100%;
 }
 
-.greach_button {
-	border: none;
-	outline: none;
-	cursor: pointer;
-	width: 70%;
-	height: 50px;
-	text-align: center;
-	color: #ffffff;
-	background: #2aaa0b;
-	border-radius: 3px;
-}
 
 a {
 	color: #2aaa0b;

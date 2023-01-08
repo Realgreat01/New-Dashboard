@@ -6,7 +6,9 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          DEFAULT: "2AAA0B",
+          DEFAULT: "#2AAA0B",
+          dark: "#404040",
+          light: "gray",
         },
       },
     },
