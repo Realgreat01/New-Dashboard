@@ -1,50 +1,83 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+<div> <RouterView /></div>
 </template>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
+<script setup>
+</script>
 
 
-#app {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  color: #404040;
+<style scoped>
+header {
+  line-height: 1.5;
+  max-height: 100vh;
 }
 
-* {
-  margin: 0;
-  max-width: 1440px;
-  margin: 0 auto;
+.logo {
+  display: block;
+  margin: 0 auto 2rem;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+nav {
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 2rem;
 }
 
-.active a {
-    color: #1e9600;
-    font-weight: 700 !important;
+nav a.router-link-exact-active {
+  color: var(--color-text);
 }
 
-.active {
-    background: linear-gradient(135deg, #f9f9f9 0%, #f9f9f9 100%);
-    color: #2AAA0B !important;
-}
-
-/* nav {
-  padding: 30px;
+nav a.router-link-exact-active:hover {
+  background-color: transparent;
 }
 
 nav a {
-  font-weight: bold;
-  color: #2c3e50;
+  display: inline-block;
+  padding: 0 1rem;
+  border-left: 1px solid var(--color-border);
 }
 
-; */
-/* } */
+nav a:first-of-type {
+  border: 0;
+}
+
+@media (min-width: 1024px) {
+  header {
+    display: flex;
+    place-items: center;
+    padding-right: calc(var(--section-gap) / 2);
+  }
+
+  .logo {
+    margin: 0 2rem 0 0;
+  }
+
+  header .wrapper {
+    display: flex;
+    place-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  nav {
+    text-align: left;
+    margin-left: -1rem;
+    font-size: 1rem;
+
+    padding: 1rem 0;
+    margin-top: 1rem;
+  }
+}
+.screen {
+  display: flex;
+  flex-direction: column !important;
+  justify-content: space-between;
+  background: #F9F9F9;
+  margin-left: 350px;
+  max-width: 1440px;
+}
+
+.containers {
+  background: #f9f9f9;
+}
 </style>
