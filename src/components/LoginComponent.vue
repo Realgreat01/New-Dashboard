@@ -1,9 +1,9 @@
 <template>
-  <div class="container">
+  <div class="containers">
     <div class="login_card">
       <div class="space">
         <h1><span class="text-3xl font-bold">Greach</span></h1>
-        <small>Welcome Back, Please login to your account.</small>
+        <p class="text-lg">Welcome Back, Please login to your account.</p>
       </div>
       <form @submit.prevent="handleSubmit" class="form_group">
         <div
@@ -75,7 +75,7 @@ const handleSubmit = async () => {
     return Message.error("Please enter your password");
 
   try {
-    const {data} = await axios.post(
+    const { data } = await axios.post(
       import.meta.env.VITE_API_URL + "login",
       formResponse
     );
@@ -85,7 +85,7 @@ const handleSubmit = async () => {
     disabled.value = false;
     return setTimeout(() => router.push("/admin"), 500);
   } catch (error) {
-    console.log(error)
+    console.log(error);
     disabled.value = false;
     const { data } = error.response;
     if (data) return Message.error(data.message);
@@ -95,15 +95,6 @@ const handleSubmit = async () => {
 </script>
 
 <style scoped>
-.see_button {
-  height: 50px;
-  border: none;
-  color: #ffffff;
-  background: none;
-  padding: 0 20px;
-  cursor: pointer;
-}
-
 .form-control {
   border: none;
   background: #ffffff;
@@ -118,21 +109,13 @@ const handleSubmit = async () => {
   padding: 0 0 0 15px;
   width: 100%;
 }
-.password_div {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  background-color: #ffffff;
-}
 
-.container {
+.containers {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: #ffffff;
 }
 
 .login_card {
@@ -156,48 +139,6 @@ const handleSubmit = async () => {
   align-items: center;
   width: 100%;
   gap: 20px;
-}
-
-input[type="email"] {
-  border: none;
-  background: #ffffff;
-  margin: 0;
-  padding: 7px 8px;
-  font-size: 14px;
-  color: inherit;
-  border: none;
-  border-radius: 3px;
-  outline: none;
-  width: 100%;
-  height: 50px;
-  padding: 0 0 0 15px;
-}
-
-input[type="password"] {
-  border: none;
-  background: #ffffff;
-  margin: 0;
-  padding: 7px 8px;
-  font-size: 14px;
-  color: inherit;
-  border: none;
-  border-radius: 3px;
-  outline: none;
-  height: 50px;
-  padding: 0 0 0 15px;
-  width: 100%;
-}
-
-.greach_button {
-  border: none;
-  outline: none;
-  cursor: pointer;
-  width: 70%;
-  height: 50px;
-  text-align: center;
-  color: #ffffff;
-  background: #2aaa0b;
-  border-radius: 3px;
 }
 
 a {

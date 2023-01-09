@@ -1,13 +1,9 @@
-<template>
-<div> <RouterView /></div>
-</template>
+<template><RouterView /></template>
 
-<script setup>
-</script>
-
+<script setup></script>
 
 <style scoped>
-header {
+/* header {
   line-height: 1.5;
   max-height: 100vh;
 }
@@ -79,5 +75,5 @@ nav a:first-of-type {
 
 .containers {
   background: #f9f9f9;
-}
+} */
 </style>
