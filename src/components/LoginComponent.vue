@@ -33,7 +33,7 @@
           </div>
         </div>
         <ButtonComponent :disabled="disabled" />
-        <router-link to="/forgot">Forgot Password?</router-link>
+        <router-link to="/forgot-password">Forgot Password?</router-link>
       </form>
     </div>
   </div>

@@ -8,7 +8,7 @@ module.exports = {
         brand: {
           DEFAULT: "#2AAA0B",
           dark: "#404040",
-          light: "gray",
+          light: "#F3F2F2",
         },
       },
     },

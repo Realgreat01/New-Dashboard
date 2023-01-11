@@ -2,10 +2,10 @@
   <div class="flex h-full w-full">
     <SidebarComponent class="sticky top-0 h-screen w-1/5 bg-white" />
     <div class="relative flex h-screen w-4/5 flex-col px-6 py-1">
-      <NavbarComponent  />
-      <RouteDetailsComponent  />
+      <NavbarComponent />
+      <RouteDetailsComponent />
       <ActionComponent />
-      <div class="h-4/6 overflow-y-scroll overflow-x-hidden">
+      <div class="route h-4/6 overflow-x-hidden overflow-y-scroll">
         <RouterView class="" />
       </div>
     </div>
@@ -21,5 +21,10 @@ import RouteDetailsComponent from "@/components/reusables/RouteDetailsComponent.
 <style lang="scss" scoped>
 .grid {
   grid-template-columns: 1fr 4fr;
+}
+.route{
+  &::-webkit-scrollbar{
+    display:none;
+  }
 }
 </style>

@@ -1,14 +1,15 @@
 <template>
   <button
     class="block w-full rounded-lg text-center text-[1.6rem] text-white"
-    style="height: 50px"
+    :class="customClass"
+    :style="customStyle"
     :disabled="disabled"
   >
     <div
-      class="flex h-full w-full gap-x-8  items-center justify-center rounded-lg bg-green-500"
+      class="flex h-full w-full items-center justify-center gap-x-8 rounded-lg bg-green-500"
       v-if="!disabled"
     >
-      <component :is="component"  />
+      <component :is="component" />
       <p>{{ text }}</p>
     </div>
     <div
@@ -31,11 +32,18 @@ defineProps({
     type: String,
     default: "Login",
   },
+  customClass: {
+    type: String,
+    default: "",
+  },
+  customStyle: {
+    type: String,
+    default: "height: 50px",
+  },
   component: {
     type: Object,
   },
 });
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

@@ -19,6 +19,7 @@
     "vue": "^3.2.45",
     "vue-apexcharts": "^1.6.2",
     "vue-m-message": "^4.0.1",
+    "vue-paycard": "^0.7.0",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {

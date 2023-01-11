@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "../views/HomePage.vue";
+import ForgotPassword from "../views/ForgotPassword.vue";
 import AdminPage from "../views/admin/AdminView.vue";
 
 const router = createRouter({
@@ -23,6 +24,10 @@ const router = createRouter({
           component: () => import("../views/admin/UsersView.vue"),
         },
         {
+          path: "users/:id",
+          component: () => import("../views/admin/SingleUserView.vue"),
+        },
+        {
           path: "networks",
           component: () => import("../views/admin/NetworksView.vue"),
         },
@@ -36,6 +41,11 @@ const router = createRouter({
         },
       ],
     },
+    {
+      path: "/forgot-password",
+      component: ForgotPassword,
+      name: "forgot-password"
+    }
   ],
 });
 
